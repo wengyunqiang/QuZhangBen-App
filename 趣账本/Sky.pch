@@ -1,0 +1,83 @@
+//
+//  Sky.pch
+//  Sky
+//
+//  Created by wengYQ on 15/12/7.
+//  Copyright © 2015年 cn.wengyq. All rights reserved.
+//
+
+#ifndef Sky_pch
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "UIColor+IMCCommon.h"
+#import "UIView+IMCCommon.h"
+#import "NSFileManager+IMCCommon.h"
+#import "UIImage+IMCCommon.h"
+#import "NSString+IMCCommon.h"
+#import <Masonry/Masonry.h>
+#import <BlocksKit+UIKit.h>
+#import <SVProgressHUD.h>
+#import "UIViewController+WYQCommon.h"
+#endif
+#define Sky_pch
+/**
+ *  时间戳
+ */
+#define kTimeStampString [NSString stringWithFormat:@"%.0f",[[NSDate date] timeIntervalSince1970] * 1000]
+#define kTimeStamp (long long)([[NSDate date] timeIntervalSince1970] * 1000)
+
+/**
+ *  字体
+ */
+#define kFontPrimary @"Arial"
+
+/**
+ *  主调颜色
+ */
+//#define kColorPrimary 0x42B4E3
+#define kColorPrimary 0x0182C6
+#define kColorSecondary 0xFF8C00
+#define kColorDefaultTableView 0xFAF9F7
+//#define kColorDefaultCollectionView 0xFAF9F7
+#define kColorDefaultCollectionView 0xEAEBEC
+#define kColorDefaultScrollView 0xFAF9F7
+#define kColorMaskView 0x000000
+#define kColorDetailViewTitle 0x737373
+#define kColorDetailViewSubTitle 0xa5a5a5
+#define kColorDetailViewContentText 0x414141
+
+/**
+ *  Log输出
+ */
+#ifdef DEBUG
+#define DLog(s, ...) NSLog(@"%s(%d): %@", __FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__])
+#else
+#define DLog(...)
+#endif
+
+//所有灰色线条颜色
+#define Color_Line [UIColor colorWithRed:239.0/255.0 green:239.0/255.0 blue:239.0/255.0 alpha:1.0]
+
+//简写方法
+#define  MCSelf(weakSelf) __weak __typeof(&*self)weakSelf = self
+#define MCUIScrollViewContentEdgeInsets UIEdgeInsetsMake(55, 0, 0, 0)
+
+//单例
+#define SYNTHESIZE_SINGLETON_FOR_CLASS(className)   + (className *)share { \
+static className *shared##className = nil; \
+static dispatch_once_t onceToken; \
+dispatch_once(&onceToken, ^{ \
+shared##className = [[self alloc] init]; \
+}); \
+return shared##className;\
+}
+
+//从StoryBoard中创建controller
+#define MCInitViewControllerFromStoryboard(storyboardName,viewControllerIdentifier) [[UIStoryboard storyboardWithName:storyboardName bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:viewControllerIdentifier]
+
+//URL
+//#define IMCApiBaseURLString  @"http://localhost/myAppData/wengYQ/Home/"
+#define IMCApiBaseURLString  @"http://114.215.92.227/myAppData/wengYQ/Home/"
+#define PATH_OF_DOCUMENT    [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+#endif
